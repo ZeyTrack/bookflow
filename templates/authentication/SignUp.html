@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/Sign.css' %}">
+    <script src="{% static 'JS/Validation.js' %}"></script>
+    <script src="{% static 'JS/SignUp.js' %}"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/messages.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="cont">
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class='bx bxs-error-circle'></i> <strong>{{ message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="container">
+            <form action="/signup/" method="post" onsubmit="return validateLoginForm()">
+                {% csrf_token %}
+                <h1>Sign Up</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" name="username" />
+                    <i class="bx bx-user"></i>
+                    <div class="error" id="username-error"></div>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Email" name="email" />
+                    <i class="bx bx-envelope"></i>
+                    <div class="error" id="email-error"></div>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" name="password" />
+                    <i class="bx bx-lock-alt"></i>
+                    <div class="error" id="password-error"></div>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Confirm password" name="confirmPassword" />
+                    <i class="bx bx-lock-alt"></i>
+                    <div class="error" id="confirmPassword-error" style="color: brown;"></div>
+                </div>
+                <div class="is-admin">
+                    <div class="a">
+                        <label><input type="radio" id="admin" name="is_admin" value="yes" />Admin</label>
+                    </div>
+                    <div class="a">
+                        <label><input type="radio" id="user" name="is_admin" value="no" checked />User</label>
+                    </div>
+                    <div class="error" id="is_admin-error"></div>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <div class="register">
+                    <p>Already have an account? <a href="/Login">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".close").click(function(){
+                $(this).parent().remove(); // Remove the parent element of the close button
+            });
+        });
+    </script>
+
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			background-image: url("{% static 'Images/libb.avif' %}");
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	</style>
+</body>
+</html>

@@ -1,0 +1,126 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	font-family: sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+
+	justify-content: center;
+
+	align-items: center;
+
+	height: 100vh;
+
+	background-image: linear-gradient(#eeedeb, #e0ccbe);
+}
+
+.container {
+	max-width: 700px;
+
+	padding: 110px;
+
+	margin: 0px 28px;
+
+	border-radius: 10px;
+	overflow: hidden;
+	background: whitesmoke;
+	box-shadow: 0 15px 20px rgba(0, 0, 0, 0.6);
+}
+
+h2 {
+	font-size: 26px;
+	font-weight: bold;
+	text-align: left;
+	color: black;
+	padding-bottom: 8px;
+
+	border-bottom: 2px solid silver;
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.input,
+textarea {
+	display: flex;
+	flex-wrap: wrap;
+	width: 50%;
+	padding-bottom: 15px;
+}
+
+.input label,
+.input textarea {
+	width: 95%;
+	color: black;
+	font-weight: bold;
+	margin: 5px 0;
+}
+
+.input input,
+.input textarea,
+.input select {
+	height: 40px;
+	width: 95%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid teal;
+	outline: none;
+}
+#cover {
+	padding-top: 10px;
+}
+
+.button {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.button button {
+	padding: 10px 40px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 14px;
+	width: 110px;
+}
+
+.button button:hover {
+	background-color: #e0ccbe;
+	color: black;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+}
+.buttons div {
+	margin: 10px;
+}
+.buttons a {
+	padding: 10px 40px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 14px;
+	display: flex;
+	width: 110px;
+	text-decoration: none;
+}
+
+.buttons a:hover {
+	background-color: #e0ccbe;
+	color: black;
+}

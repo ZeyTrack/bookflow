@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Description" content="User's Book Collection" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'CSS/MyBook.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/navba.css' %}" />
+    <script defer src="{% static 'JS/footer.js' %}"></script>
+    <script defer src="{% static 'JS/MyBooks.js' %}"></script>
+    <title>My Books</title>
+</head>
+<body>
+    <div class="cont">
+        <div class="navbar">
+            <div class="logo">
+                <h1>BookNest</h1>
+            </div>
+            <nav>
+                <form method="GET" action="{% url 'categories' %}" class="form-inline ml-3">
+                    <div class="search-wrapper">
+                        <input class="form-control form-control-navbar" id="searchInput" name="search_name" type="search" placeholder="Search books...">
+                        <button class="search-icon" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </nav>
+            <div class="log_buttons">
+                {% if user.is_authenticated %}
+                    <button class="log_btn" type="submit"><a href="/signout">Log Out</a></button>
+                {% else %}
+                    <button class="log_btn" type="submit"><a href="/signup">Sign up</a></button>
+                    <button class="log_btn" type="submit"><a href="/Login">Log in</a></button>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul class="links">
+                <li class="activ"><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'my_books' %}">My Books</a></li>
+                <li><a href="{% url 'categories' %}">Categories</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="pageTitle">
+            <h2>My Books</h2>
+        </div>
+        <div class="books">
+            <section class="borrowed-books">
+                <h2>Borrowed Books</h2>
+                <div class="images" id="borrowed-collection">
+                    {% for book in borrowed_books %}
+                        <div class="image">
+                            {% if book.image %}
+                                <img src="{{ book.image.url }}" alt="{{ book.title }}" />
+                            {% endif %}
+                            <div class="image-content">
+                                <h3>{{ book.title }}</h3>
+                                <p>Author: {{ book.author }}</p>
+                                <p>Description: {{ book.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+    <footer id="app-footer"></footer>
+</body>
+</html>

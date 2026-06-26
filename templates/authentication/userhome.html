@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Description" content="Best book Library ever" />
+  
+        <link rel="stylesheet" type="text/css" href="{% static 'CSS/userhome.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'CSS/navba.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'CSS/messages.css' %}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>Book Nest</title>
+    </head>
+
+    <body>
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class='bx bxs-error-circle'></i> <strong>{{ message }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        <div class="cont">
+            <div class="navbar">
+                <div class="logo">
+                    <h1>BookNest</h1>
+                </div>
+                <nav>
+                    <!--SEARCH FORM-->
+                    <form method="GET" action="{% url 'categories' %}" class="form-inline ml-3">
+                        <div class="search-wrapper">
+                            <input class="form-control form-control-navbar" id="searchInput" name="search_name" type="search" placeholder="Search books...">
+                            <button class="search-icon" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </nav>
+                <div class="log_buttons">
+                    {% if user.is_authenticated %}
+                        <button class="log_btn" type="submit"><a href="/signout">Log Out</a></button>
+                    {% else %}
+                        <button class="log_btn" type="submit"><a href="/signup">Sign up</a></button>
+                        <button class="log_btn" type="submit"><a href="/Login">Log in</a></button>
+                    {% endif %}
+                </div>
+            </div>
+            <nav>
+                <ul class="links">
+                    <li class="activ"><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'my_books' %}">My Books</a></li>
+                    <li><a href="{% url 'categories' %}">Categories</a></li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+            <article>
+                <p class="welcome-message" id="welcomeMessage"></p>
+            </article>
+
+            <div class="books">
+                <section class="collection">
+                    <h2>All Collection</h2>
+                    <div class="images" id="collection"></div>
+                    <button class="more" id="collectionMore" onclick="collectionAddMoreBooks()">More</button>
+                </section>
+            </div>
+        </div>
+    
+
+        <footer id="app-footer"></footer>
+        <script src="{% static 'JS/footer.js' %}"></script>
+        <script>
+            $(document).ready(function(){
+                $(".close").click(function(){
+                    $(this).parent().remove(); // Remove the parent element of the close button
+                });
+            });
+        </script>
+        <script>
+            let welcomeMessage = `Welcome to <span>BookNest</span>, where every visit brings you
+closer to your next favorite book! Explore our vast collection,
+enjoy the journey through stories that spark your imagination, and
+cherish each moment in our community of passionate readers. Happy
+reading!`;
+
+            document.getElementById("welcomeMessage").innerHTML = welcomeMessage;
+
+            class Book {
+                constructor(coverSource, title, author, available, description) {
+                    this.coverSource = coverSource;
+                    this.title = title;
+                    this.author = author;
+                    this.available = available;
+                    this.description = description;
+                }
+            }
+
+            let allBooks = [
+                new Book("{% static 'Images/10.jpg' %}", "House of Flame and Shadow", "Sarah J. Maas", "Bryce Quinlan never expected to see a world other than Midgard, but now that she has, all she wants is to get back. Everything she loves is in Midgard: her family, her friends, her mate. Stranded in a strange new world, she's going to need all her wits about her to get home again. And that's no easy feat when she has no idea who to trust."),
+                new Book("{% static 'Images/11.jpg' %}", "he Warm Hands of Ghosts", "Katherine Arden",  "During the Great War, a combat nurse searches for her brother, believed dead in the trenches despite eerie signs that suggest otherwise, in this hauntingly beautiful historical novel with a speculative twist from the New York Times bestselling author of The Bear and the Nightingale"),
+                new Book("{% static 'Images/3.jpg' %}", "Floating Hotel", "Grace Curtis",  "In this debut science fiction novel, the Grand Abeona Hotel serves as a haven for misfits and rebels amidst a galaxy-spanning mystery. As secrets unravel and intrigues unfold, Carl, the devoted hotel manager, must confront the question of when to relinquish control amid cosmic forces beyond his understanding.",
+				),
+                new Book("{% static 'Images/4.jpg' %}", "Pangu's Shadow", "Karen Bao",  "Book 4 Description"),
+                new Book("{% static 'Images/5.jpg' %}", "Book 5", "Ali", "No", "Book 5 Description"),
+                new Book("{% static 'Images/6.jpg' %}", "Book 6", "Mill Gebson", "Yes", "Book 6 Description"),
+                new Book("{% static 'Images/7.jpg' %}", "Book 7", "Adrain", "Yes", "Book 7 Description"),
+                new Book("{% static 'Images/8.jpg' %}", "Book 8", "Kevin", "No", "Book 8 Description"),
+                new Book("{% static 'Images/9.jpg' %}", "Book 9", "Mark", "Yes", "Book 9 Description"),
+            ];
+
+            for (let i = 0; i < 4; i++) {
+                document.getElementById("collection").innerHTML += `<div class="image">
+                    <img id="book1" src="${allBooks[i].coverSource}" alt="" />
+                    <div class="image-content">
+                        <button>Add to Favorite books</button>
+                        <h3 id="bookTitle">${allBooks[i].title}</h3>
+                        <p id="bookAuthor">${allBooks[i].author}</p>
+                        <p id="bookDescription">${allBooks[i].description}</p>
+                        <p id="bookAvailability">${allBooks[i].available}</p>
+                    </div>
+                </div>`;
+            }
+
+            function collectionAddMoreBooks() {
+                for (let i = 4; i < allBooks.length; i++) {
+                    document.getElementById("collection").innerHTML += `<div class="image">
+                        <img id="book1" src="${allBooks[i].coverSource}" alt="" />
+                        <div class="image-content">
+                            <button>Add to My Books</button>
+                            <h3 id="bookTitle">${allBooks[i].title}</h3>
+                            <p id="bookAuthor">${allBooks[i].author}</p>
+                            <p id="bookDescription">${allBooks[i].description}</p>
+                            <p id="bookAvailability">${allBooks[i].available}</p>
+                        </div>
+                    </div>`;
+                }
+                let button = document.getElementById("collectionMore");
+                button.style.visibility = "hidden";
+            }
+
+            let counter = parseInt(localStorage.getItem("bookCounter")) || 0;
+
+            const container = document.getElementById("collection");
+            container.addEventListener("click", function (event) {
+                if (event.target.tagName === "BUTTON") {
+                    const button = event.target;
+                    const bookContent = button.closest(".image-content");
+                    const coverSource = bookContent.parentElement.querySelector("img").src;
+                    const title = bookContent.querySelector("h3").innerHTML;
+                    const author = bookContent.querySelector("#bookAuthor").innerHTML;
+                    const description = bookContent.querySelector("#bookDescription").innerHTML;
+                    const available = bookContent.querySelector("#bookAvailability").innerHTML;
+
+                    const book = {
+                        coverSource,
+                        title,
+                        author,
+                        description,
+                        available,
+                    };
+
+                    counter++;
+                    localStorage.setItem("bookCounter", counter);
+                    const key = `book${counter}`;
+                    localStorage.setItem(key, JSON.stringify(book));
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+
+.welcome-message {
+	font-family: "Segoe UI	", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+	color: #333;
+	background-color: var(--secondColor);
+	padding: 20px;
+	border-radius: var(--borderRaduis);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin: 20px auto;
+	width: 90%;
+	line-height: 1.8;
+	text-align: left;
+	text-indent: 50px; /* Adds an indent to the first line */
+}
+.welcome-message::first-letter {
+	font-size: 30px;
+}
+
+/* Media query to handle smaller screens, making the font size smaller and reducing width */
+@media (max-width: 600px) {
+	.welcome-message {
+		font-size: 16px;
+		width: 90%;
+	}
+}
+
+.content article span {
+	font-family: "Cinzel", serif;
+	font-optical-sizing: auto;
+	font-weight: bold;
+	font-size: 25px;
+	text-transform: capitalize;
+}
+
+.content .books {
+	color: #333;
+	background-color: var(--secondColor);
+	padding: 20px;
+	border-radius: var(--borderRaduis);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin: 20px auto;
+	width: 90%;
+}
+
+.collection .images {
+	background-color: var(--secondColor);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	border-radius: var(--borderRaduis);
+	padding: 20px;
+}
+
+.collection .image {
+	background-color: white;
+
+	width: 230px;
+	padding: 0px;
+	margin: 10px;
+
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+img {
+	padding: 10px;
+	width: 220px;
+	height: 280px;
+	border-radius: 18px;
+}
+
+.image-content {
+	/* background-color: aquamarine; */
+	margin: 10px 10px 0px;
+	width: 220px;
+	height: 150px;
+	overflow: scroll;
+}
+.image-content::-webkit-scrollbar {
+	visibility: hidden;
+}
+
+.image button {
+	padding: 7px 20px;
+	background-color: rgb(231, 227, 227);
+	color: rgb(0, 0, 0);
+	border: none;
+	border-radius: 20px ;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 14px;
+	position: sticky;
+	top: 0;
+	box-shadow: 0 4px 8px rgba(1, 1, 1, 0.2);
+	margin-left: 10px;
+}
+.image button:hover {
+	color: rgb(255, 250, 250);
+	background-color: #000000;
+}
+
+button.more {
+	width: 69px;
+	height: 25px;
+	color: #333;
+	background-color: #eeedeb;
+	border-radius: 10px;
+	text-align: center;
+	border: none;
+}
+button.more:hover {
+	color: #eeedeb;
+	background-color: #333;
+}

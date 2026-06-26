@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin</title>
+    <meta name="description" content="This Is Our Library website" />
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/add.css' %}">
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'edit_book' %}" method="post" id="editBookForm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Edit Book</h2>
+            <div class="content">
+                <div class="input">
+                    <label for="img">Cover</label>
+                    <input type="file" id="img" name="img" />
+                </div>
+
+                <div class="input">
+                    <label for="book_id">Book ID</label>
+                    <input type="text" id="book_id" name="book_id" placeholder="Enter Book ID" required />
+                </div>
+
+                <div class="input">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" placeholder="New Book Name.." required />
+                </div>
+
+                <div class="input">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" placeholder="New Author Name.." />
+                </div>
+
+                <div class="input">
+                    <label for="category">Category</label>
+                    <select name="category" id="category" class="input">
+                        <option value="Horror">Horror</option>
+                        <option value="Childrens">Childrens</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Historical Fiction">Historical Fiction</option>
+                        <option value="Science Fiction">Science Fiction</option>
+                    </select>
+                </div>
+
+                <div class="input">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" cols="10" rows="5" placeholder="Edit Book Description"></textarea>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <div class="button">
+                    <a href="{% url 'admin_home' %}">Back</a>
+                </div>
+                <div class="button">
+                    <button type="submit">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'JS/addbook.js' %}"></script>
+</body>
+</html>

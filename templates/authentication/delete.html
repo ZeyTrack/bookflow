@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete Book</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/edit.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/delet.css' %}">
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'delete' %}" method="post" id="deleteBookForm">
+            <h2>Delete Book</h2>
+            <div class="content">
+                <div class="input">
+                    <label for="book_id">Book ID</label>
+                    <input type="text" name="book_id" id="book_id" placeholder="Enter Book ID to Delete" required />
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="button">
+                   
+                    <a href="{% url 'admin_home' %}">Back</a>
+                </div>
+                <div class="button">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                    
+                </div>
+               
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'JS/edit.js' %}"></script>
+</body>
+</html>

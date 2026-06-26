@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Categories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Description" content="User's Book Collection" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'CSS/categ.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/navba.css' %}" />
+    <script src="{% static 'JS/catego.js' %}"></script>
+</head>
+<body>
+    <div class="cont">
+        <div class="navbar">
+            <div class="logo">
+                <h1>BookNest</h1>
+            </div>
+            <nav>
+                <!--SEARCH FORM-->
+                <form method="GET" action="{% url 'categories' %}" class="form-inline ml-3">
+                    <div class="search-wrapper">
+                        <input class="form-control form-control-navbar" id="searchInput" name="search_name" type="search" placeholder="Search books...">
+                        <button class="search-icon" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </nav>
+            <div class="log_buttons">
+                {% if user.is_authenticated %}
+                    <button class="log_btn" type="submit"><a href="/signout">Log Out</a></button>
+                {% else %}
+                    <button class="log_btn" type="submit"><a href="/signup">Sign up</a></button>
+                    <button class="log_btn" type="submit"><a href="/Login">Log in</a></button>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul class="links">
+                <li class="activ"><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'my_books' %}">My Books</a></li>
+                <li><a href="{% url 'categories' %}">Categories</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+        <ul class="categories-list" id="categories-list">
+            {% for category, books in category_books.items %}
+                <li class="category-item">
+                    <h3>{{ category }}</h3>
+                    <ul>
+                        {% for book in books %}
+                            <li>
+                                {% if book.image %}
+                                    <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                                {% endif %}
+                                <h4>{{ book.title }}</h4>
+                                <p><strong>Author:</strong> {{ book.author }}</p>
+                                <p>{{ book.description }}</p>
+                                <form class="borrow-form" data-book-id="{{ book.id }}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="borrow-button">Borrow</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer id="app-footer"></footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.borrow-form').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var bookId = form.data('book-id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'), // URL to your borrow_book view
+                    data: {
+                        'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    },
+                    success: function(response) {
+                        if(response.success) {
+                            form.find('.borrow-button').text('Non available').attr('disabled', 'disabled');
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(response) {
+                        alert('Error borrowing the book.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

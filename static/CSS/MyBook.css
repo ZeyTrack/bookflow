@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+
+.welcome-message {
+	font-family: "Segoe UI	", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+	color: #333;
+	background-color: var(--secondColor);
+	padding: 20px;
+	border-radius: var(--borderRaduis);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin: 20px auto;
+	width: 90%;
+	line-height: 1.8;
+	text-align: left;
+	text-indent: 50px; /* Adds an indent to the first line */
+}
+.welcome-message::first-letter {
+	font-size: 30px;
+}
+
+/* Media query to handle smaller screens, making the font size smaller and reducing width */
+@media (max-width: 600px) {
+	.welcome-message {
+		font-size: 16px;
+		width: 90%;
+	}
+}
+
+.content article span {
+	font-family: "Cinzel", serif;
+	font-optical-sizing: auto;
+	font-weight: bold;
+	font-size: 25px;
+	text-transform: capitalize;
+}
+
+.content .pageTitle {
+	color: var(--fontColor);
+	font-size: 25px;
+	font-weight: bold;
+	padding: 20px;
+	width: 90%;
+}
+
+.content .books {
+	color: #333;
+	background-color: var(--secondColor);
+	padding: 20px;
+	border-radius: var(--borderRaduis);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	margin: 20px auto;
+	width: 90%;
+}
+
+.collection .images {
+	background-color: var(--secondColor);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	border-radius: var(--borderRaduis);
+	padding: 20px;
+}
+
+.collection .image {
+	background-color: white;
+
+	width: 230px;
+	padding: 0px;
+	margin: 10px;
+
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+img {
+	padding: 10px;
+	width: 220px;
+	height: 280px;
+	border-radius: 18px;
+}
+
+.image-content {
+	/* background-color: aquamarine; */
+	margin: 10px 10px 0px;
+	width: 220px;
+	height: 150px;
+	overflow: scroll;
+}
+.image-content::-webkit-scrollbar {
+	visibility: hidden;
+}
+
+.image button {
+	padding: 7px 60px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 14px;
+	position: sticky;
+	top: 0;
+	margin-left: 10px;
+}
+.image button:hover {
+	color: black;
+	background-color: #e0ccbe;
+}
+
