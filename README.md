@@ -60,4 +60,4 @@ Then open your browser and go to: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## 👥 Team
 
-Built with ❤️ by a team of 5 developers.
+Developed by me alongside a team of 4 developers.
